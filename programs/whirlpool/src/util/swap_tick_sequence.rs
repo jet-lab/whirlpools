@@ -44,7 +44,7 @@ impl<'info> SwapTickSequence<'info> {
         let array = self.arrays.get(array_index);
         match array {
             Some(array) => array.get_tick(tick_index, tick_spacing),
-            _ => Err(ErrorCode::TickArrayIndexOutofBounds),
+            _ => Err(ErrorCode::TickArrayIndexOutofBounds)?,
         }
     }
 
@@ -72,7 +72,7 @@ impl<'info> SwapTickSequence<'info> {
                 array.update_tick(tick_index, tick_spacing, update)?;
                 Ok(())
             }
-            _ => Err(ErrorCode::TickArrayIndexOutofBounds),
+            _ => Err(ErrorCode::TickArrayIndexOutofBounds)?,
         }
     }
 
@@ -85,7 +85,7 @@ impl<'info> SwapTickSequence<'info> {
         let array = self.arrays.get(array_index);
         match array {
             Some(array) => array.tick_offset(tick_index, tick_spacing),
-            _ => Err(ErrorCode::TickArrayIndexOutofBounds),
+            _ => Err(ErrorCode::TickArrayIndexOutofBounds)?,
         }
     }
 
@@ -119,7 +119,7 @@ impl<'info> SwapTickSequence<'info> {
             // If we get to the end of the array sequence and next_index is still not found, throw error
             let next_array = match self.arrays.get(array_index) {
                 Some(array) => array,
-                None => return Err(ErrorCode::TickArraySequenceInvalidIndex),
+                None => return Err(ErrorCode::TickArraySequenceInvalidIndex)?,
             };
 
             let next_index =
