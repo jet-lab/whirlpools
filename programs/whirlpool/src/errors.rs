@@ -1,8 +1,8 @@
 use std::num::TryFromIntError;
 
-use anchor_lang::error;
+use anchor_lang::error_code;
 
-#[error]
+#[error_code]
 #[derive(PartialEq)]
 pub enum ErrorCode {
     #[msg("Enum value could not be converted")]
