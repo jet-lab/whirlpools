@@ -88,8 +88,8 @@ pub fn swap(
             amount_remaining = amount_remaining
                 .checked_sub(swap_computation.amount_in)
                 .ok_or(ErrorCode::AmountRemainingOverflow)?;
-            amount_remaining = amount_remaining.
-                checked_sub(swap_computation.fee_amount)
+            amount_remaining = amount_remaining
+                .checked_sub(swap_computation.fee_amount)
                 .ok_or(ErrorCode::AmountRemainingOverflow)?;
 
             amount_calculated = amount_calculated
@@ -2499,7 +2499,6 @@ mod swap_error_tests {
         swap_test_info.run(&mut tick_sequence, 100);
     }
 
-
     #[test]
     #[should_panic(expected = "AmountCalcOverflow")]
     // Swapping at high liquidity/price can lead to an amount calculated
@@ -2511,7 +2510,8 @@ mod swap_error_tests {
         // Use filled arrays to minimize the the overflow from calculations, rather than accumulation
         let array_1_ticks: Vec<TestTickInfo> = build_filled_tick_array(439296, TS_128);
         let array_2_ticks: Vec<TestTickInfo> = build_filled_tick_array(439296 - 88 * 128, TS_128);
-        let array_3_ticks: Vec<TestTickInfo> = build_filled_tick_array(439296 - 2 * 88 * 128, TS_128);
+        let array_3_ticks: Vec<TestTickInfo> =
+            build_filled_tick_array(439296 - 2 * 88 * 128, TS_128);
         let swap_test_info = SwapTestFixture::new(SwapTestFixtureInfo {
             tick_spacing: TS_128,
             liquidity: (u32::MAX as u128) << 2,
@@ -2533,5 +2533,4 @@ mod swap_error_tests {
         );
         swap_test_info.run(&mut tick_sequence, 100);
     }
-
 }
