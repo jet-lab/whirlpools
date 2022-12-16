@@ -10,6 +10,7 @@ pub struct OpenPosition<'info> {
     #[account(mut)]
     pub funder: Signer<'info>,
 
+    /// CHECK:
     pub owner: UncheckedAccount<'info>,
 
     #[account(init,

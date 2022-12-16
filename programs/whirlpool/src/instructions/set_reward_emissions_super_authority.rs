@@ -10,6 +10,7 @@ pub struct SetRewardEmissionsSuperAuthority<'info> {
     #[account(address = whirlpools_config.reward_emissions_super_authority)]
     pub reward_emissions_super_authority: Signer<'info>,
 
+    /// CHECK:
     pub new_reward_emissions_super_authority: UncheckedAccount<'info>,
 }
 
