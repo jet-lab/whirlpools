@@ -3,13 +3,14 @@ use crate::{
     math::add_liquidity_delta,
     state::{Tick, TickUpdate, WhirlpoolRewardInfo, NUM_REWARDS},
 };
+use anchor_lang::Result;
 
 pub fn next_tick_cross_update(
     tick: &Tick,
     fee_growth_global_a: u128,
     fee_growth_global_b: u128,
     reward_infos: &[WhirlpoolRewardInfo; NUM_REWARDS],
-) -> Result<TickUpdate, ErrorCode> {
+) -> Result<TickUpdate> {
     let mut update = TickUpdate::from(tick);
 
     update.fee_growth_outside_a = fee_growth_global_a.wrapping_sub(tick.fee_growth_outside_a);
@@ -36,7 +37,7 @@ pub fn next_tick_modify_liquidity_update(
     reward_infos: &[WhirlpoolRewardInfo; NUM_REWARDS],
     liquidity_delta: i128,
     is_upper_tick: bool,
-) -> Result<TickUpdate, ErrorCode> {
+) -> Result<TickUpdate> {
     // noop if there is no change in liquidity
     if liquidity_delta == 0 {
         return Ok(TickUpdate::from(tick));

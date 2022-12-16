@@ -1,8 +1,9 @@
 use crate::{
-    errors::ErrorCode,
     math::{add_liquidity_delta, checked_mul_shift_right},
     state::{Position, PositionUpdate, NUM_REWARDS},
 };
+
+use anchor_lang::Result;
 
 pub fn next_position_modify_liquidity_update(
     position: &Position,
@@ -10,7 +11,7 @@ pub fn next_position_modify_liquidity_update(
     fee_growth_inside_a: u128,
     fee_growth_inside_b: u128,
     reward_growths_inside: &[u128; NUM_REWARDS],
-) -> Result<PositionUpdate, ErrorCode> {
+) -> Result<PositionUpdate> {
     let mut update = PositionUpdate::default();
 
     // Calculate fee deltas.

@@ -52,7 +52,7 @@ pub fn handler(
     sqrt_price_limit: u128,
     amount_specified_is_input: bool,
     a_to_b: bool, // Zero for one
-) -> ProgramResult {
+) -> Result<()> {
     let whirlpool = &mut ctx.accounts.whirlpool;
     let clock = Clock::get()?;
     // Update the global reward growth which increases as a function of time.
@@ -123,7 +123,7 @@ fn perform_swap<'info>(
     amount_a: u64,
     amount_b: u64,
     a_to_b: bool,
-) -> ProgramResult {
+) -> Result<()> {
     // Transfer from user to pool
     let deposit_account_user;
     let deposit_account_pool;

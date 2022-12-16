@@ -8,6 +8,7 @@ use crate::{
     util::SwapTickSequence,
 };
 use std::convert::TryInto;
+use anchor_lang::Result;
 
 #[derive(Debug)]
 pub struct PostSwapUpdate {
@@ -29,7 +30,7 @@ pub fn swap(
     amount_specified_is_input: bool,
     a_to_b: bool,
     timestamp: u64,
-) -> Result<PostSwapUpdate, ErrorCode> {
+) -> Result<PostSwapUpdate> {
     if sqrt_price_limit < MIN_SQRT_PRICE_X64 || sqrt_price_limit > MAX_SQRT_PRICE_X64 {
         return Err(ErrorCode::SqrtPriceOutOfBounds.into());
     }
@@ -233,7 +234,7 @@ fn calculate_update(
     fee_growth_global_a: u128,
     fee_growth_global_b: u128,
     reward_infos: &[WhirlpoolRewardInfo; NUM_REWARDS],
-) -> Result<(TickUpdate, u128), ErrorCode> {
+) -> Result<(TickUpdate, u128)> {
     // Use updated fee_growth for crossing tick
     // Use -liquidity_net if going left, +liquidity_net going right
     let signed_liquidity_net = if a_to_b {
