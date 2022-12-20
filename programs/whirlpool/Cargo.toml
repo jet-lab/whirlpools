@@ -15,14 +15,14 @@ cpi = ["no-entrypoint"]
 default = []
 
 [dependencies]
-anchor-lang = { git = "https://github.com/jet-lab/anchor", branch = "master" }
-anchor-spl = { git = "https://github.com/jet-lab/anchor", branch = "master" }
-spl-token = { version = "3.3.1", features = ["no-entrypoint"] }
-solana-program = "1.8.12"
+anchor-lang = { git = "https://github.com/jet-lab/anchor", branch = "temp-version-bump-1-11" }
+anchor-spl = { git = "https://github.com/jet-lab/anchor", branch = "temp-version-bump-1-11" }
+spl-token = { version = "3", features = ["no-entrypoint"] }
+solana-program = "1.11"
 thiserror = "1.0"
 uint = { version = "0.9.1", default-features = false }
 borsh = "0.9.1"
-mpl-token-metadata = { version = "1.2.5", features = ["no-entrypoint"] }
+mpl-token-metadata = { version = "1", features = ["no-entrypoint"] }
 
 [dev-dependencies]
 proptest = "1.0"
