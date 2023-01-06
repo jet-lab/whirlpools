@@ -22,6 +22,26 @@ pub mod util;
 use crate::state::{OpenPositionBumps, OpenPositionWithMetadataBumps, WhirlpoolBumps};
 use instructions::*;
 
+/// The WhirlpoolSwap program.
+#[derive(Clone)]
+pub struct WhirlpoolSwap;
+
+impl anchor_lang::AccountDeserialize for WhirlpoolSwap {
+    fn try_deserialize(buf: &mut &[u8]) -> Result<Self> {
+        WhirlpoolSwap::try_deserialize_unchecked(buf)
+    }
+
+    fn try_deserialize_unchecked(_buf: &mut &[u8]) -> Result<Self> {
+        Ok(WhirlpoolSwap)
+    }
+}
+
+impl anchor_lang::Id for WhirlpoolSwap {
+    fn id() -> Pubkey {
+        ID
+    }
+}
+
 #[program]
 pub mod whirlpool {
     use super::*;
